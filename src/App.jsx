@@ -1,35 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import Card from "./Components/Card";
+import Clit from "./Components/Clit";
+import Nav from "./Components/Nav";
+import "./assets/css/components/app.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState([]);
+  const [popularTags, setPopularTags] = useState([]);
+  const url = "https://api.realworld.io/api/articles";
+
+  useEffect(() => {
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setData(data.articles);
+        console.log(data.articles[0]);
+      });
+  }, []);
+
+  // useEffect(() => {
+  //   fetch("https://api.realworld.io/api/tags")
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setPopularTags(data);
+  //     });
+  // }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main>
+        {/* navigation */}
+        <section className="navigation-section">
+          <Nav />
+        </section>
+
+        {/* body */}
+
+        <section className="body-wrapper">
+          <div className="feeds">
+            {data.map((item, index) => {
+              return (
+                <Card
+                  key={index}
+                  image={item.author.image}
+                  username={item.author.username}
+                  date={item.createdAt}
+                  title={item.title}
+                  desc={item.description}
+                  fav={item.favoritesCount}
+                />
+              );
+            })}
+          </div>
+          <div className="tags">
+            <div className="tag-wrapper">
+              <p>Popular Tags</p>
+              <Clit />{" "}
+            </div>
+          </div>
+        </section>
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

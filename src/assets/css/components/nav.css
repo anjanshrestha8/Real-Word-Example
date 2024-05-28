@@ -1,0 +1,53 @@
+.navigation-wrapper {
+  max-width: 70rem;
+  /* background-color: red; */
+
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  align-items: center;
+  height: 3.3rem;
+}
+
+.logo > h1 {
+  color: #5cb85c;
+  align-items: center;
+  font-size: 25px;
+}
+nav > ul {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+nav > ul > li {
+  list-style: none;
+  color: grey;
+  cursor: pointer;
+}
+
+nav > ul > li:hover {
+  color: black;
+}
+
+nav > ul > li:active {
+  color: black;
+}
+
+/* banner section */
+
+.navigation-banner-wrapper {
+  background-color: #5cb85c;
+  color: white;
+  height: 10rem;
+  text-align: center;
+  padding: 11px;
+  align-items: center;
+}
+.navigation-banner-wrapper > h1 {
+  font-size: 54px;
+  font-weight: bold;
+}
+.navigation-banner-wrapper > p {
+  font-size: 22px;
+}

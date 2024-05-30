@@ -63,3 +63,8 @@ FaHeart {
   justify-content: space-between;
   align-items: center;
 }
+
+.tag-section > div:last-child {
+  display: flex;
+  gap: 11px;
+}

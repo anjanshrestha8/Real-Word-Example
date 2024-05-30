@@ -40,10 +40,11 @@ function Card(props) {
         <br />
         <div className="tag-section">
           <a>Read More..</a>
-          <Clit />
-          {/* {tags?.map((item, index) => {
-            return <Clit key={index} tagName={item[0]} />;
-          })} */}
+          <div>
+            {props.tag?.map((item, index) => (
+              <Clit key={index} tagName={item} />
+            ))}
+          </div>
         </div>
       </div>
     </>

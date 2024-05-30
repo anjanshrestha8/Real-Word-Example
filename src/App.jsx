@@ -15,20 +15,21 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        setData(data.articles);
         console.log(data.articles[0]);
+        setData(data.articles);
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch("https://api.realworld.io/api/tags")
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setPopularTags(data);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("https://api.realworld.io/api/tags")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.tags);
+        setPopularTags(data.tags);
+      });
+  }, []);
 
   return (
     <>
@@ -52,6 +53,7 @@ function App() {
                   title={item.title}
                   desc={item.description}
                   fav={item.favoritesCount}
+                  tag={item.tagList}
                 />
               );
             })}
@@ -59,7 +61,12 @@ function App() {
           <div className="tags">
             <div className="tag-wrapper">
               <p>Popular Tags</p>
-              <Clit />{" "}
+              <div>
+                {popularTags?.map((item, index) => {
+                  console.log(item);
+                  <Clit key={index} tagName={item} />;
+                })}
+              </div>
             </div>
           </div>
         </section>
